@@ -21,9 +21,9 @@ void analyzeSales(const vector<double>& sales);
 
 int main() 
 {
-    array<double, DAYS> sales;
+    vector<double> sales;
     
-    if (!loadSales(sales, "sales.txt"))
+    if (!loadSales(sales, SALES_FILE))
     {
         cout << "Error: Could not open file." << endl;
         cout << "Make sure the file exists and is in the project folder."
@@ -41,18 +41,27 @@ int main()
 
 }
 
-// loadSales() reads 30 values from file into array   
-bool loadSales(array<double, DAYS>& sales, string filename)
+// loadSales() reads 30 values from file into vector   
+bool loadSales(vector<double>& sales, string filename)
 {
     ifstream file(filename);
+    
     if (!file)
     {
         return false;
     }
 
+    double value;
+
     for (int i = 0; i < DAYS; i++)
     {
-        file >> sales.at(i);
+        if (!(file >> value))
+        {
+            cout << "ERROR: File does not contain "
+                 << DAYS << " valid sales values.\n";
+            return false;
+        }
+        sales.push_back(value);
     }
 
     file.close();
@@ -85,9 +94,6 @@ void analyzeSales(const vector<double>& sales)
 
     vector<double> backup(sales);
     
-
-    backup.swap(sales);
-
     cout << "After swap, first element in back up: $"
          << backup.front() << endl;
     double* rawPointer = backup.data();
