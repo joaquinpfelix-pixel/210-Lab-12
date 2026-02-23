@@ -15,6 +15,8 @@ bool loadSales(array<double, DAYS>& sales, string filename);
 // printSales() prints each day's sales
 // arguments: const array reference
 // returns: nothing
+void printSales(const array<double, DAYS>& sales);
+void analyzeSales(const array<double, DAYS>& sales);
 
 int main() 
 {
@@ -41,7 +43,7 @@ int main()
 // loadSales() reads 30 values from file into array   
 bool loadSales(array<double, DAYS>& sales, string filename)
 {
-    ofstream file(filename);
+    ifstream file(filename);
     if (!file)
     {
         return false;
@@ -59,17 +61,17 @@ bool loadSales(array<double, DAYS>& sales, string filename)
 // printSales() prints each day's sales
 void printSales( const array<double, DAYS>& sales)
 {
-    cout << "Daily SAles:" << endl;
+    cout << "Daily Sales:" << endl;
 
     for (int i = 0; i < sales.size(); i++)
     {
-        cout << "Day " << (i+2) << ": $" << sales.at(i) << endl;
+        cout << "Day " << (i + 1) << ": $" << sales.at(i) << endl;
     }
     cout << endl;
 }
 
 //analyzeSales() uses various std::array member functions
-void analyzeSales(const array<double, DAYS>& sales)
+void analyzeSales(array<double, DAYS>& sales)
 {
     cout << "Array Size: " << sales.size() << endl;
     cout << "First Day's Sales: $" << sales.front() << endl;
@@ -83,7 +85,7 @@ void analyzeSales(const array<double, DAYS>& sales)
     array<double, DAYS> backup;
     backup.fill(0.0);
 
-    backup.swap(const_cast<array<double, DAYS>&>(sales));
+    backup.swap(sales);
 
     cout << "after swap, first element in back up: $"
          << backup.front() << endl;
