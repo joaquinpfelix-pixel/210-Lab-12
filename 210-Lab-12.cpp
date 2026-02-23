@@ -5,7 +5,7 @@
 #include <fstream>
 using namespace std;
 
-
+const int DAYS = 30;
 
 int main() { 
 
@@ -41,3 +41,26 @@ void printSales( const array<double, DAYS>& sales)
     cout << endl;
 }
 
+//analyzeSales() uses various std::array member functions
+void analyzeSales(const array<double, DAYS>& sales)
+{
+    cout << "Array Size: " << sales.size() << endl;
+    cout << "First Day's Sales: $" << sales.front() << endl;
+    cout << "Last Day's Sales: $" << sales.back() << endl;
+
+    if (!sales.empty())
+    {
+        cout << "Array is not empty." << endl;
+    }
+
+    array<double, DAYS> backup;
+    backup.fill(0.0);
+
+    backup.swap(const_cast<array<double, DAYS>&>(sales));
+
+    cout << "after swap, first element in back up: $"
+         << backup.front() << endl;
+    double* rawPointer = backup.data();
+    cout << "Accessing first element using data(): $"
+         << rawPointer[0] << endl;
+}
