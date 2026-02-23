@@ -7,7 +7,34 @@ using namespace std;
 
 const int DAYS = 30;
 
-int main() { 
+// Load sales() reads values from a file
+// arguments: array reference, file name
+// returns: nothing
+bool loadSales(array<double, DAYS>& sales, string filename);
+
+// printSales() prints each day's sales
+// arguments: const array reference
+// returns: nothing
+
+int main() 
+{
+    array<double, DAYS> sales;
+    
+    if (!loadSales(sales, "sales.txt"))
+    {
+        cout << "Error: Could not open file." << endl;
+        cout << "Make sure the file exists and is in the project folder."
+             << endl;
+        return 0;
+    }
+
+    cout << "STORE SALES SIMULATION" << endl;
+    cout << "======================" << endl;
+
+    printSales(sales);
+    analyzeSales(sales);
+
+    return 0;
 
 }
 
@@ -34,7 +61,7 @@ void printSales( const array<double, DAYS>& sales)
 {
     cout << "Daily SAles:" << endl;
 
-    for (int i = 0; i < sales.size(); i+)
+    for (int i = 0; i < sales.size(); i++)
     {
         cout << "Day " << (i+2) << ": $" << sales.at(i) << endl;
     }
