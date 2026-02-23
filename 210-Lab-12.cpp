@@ -1,22 +1,23 @@
 // COMSC-210 | Lav 12 | Joaquin Felix
 
 #include <iostream>
-#include <array>
+#include <vector>
 #include <fstream>
 using namespace std;
 
 const int DAYS = 30;
+const string SALES_FILE = "sales.txt";
 
 // Load sales() reads values from a file
-// arguments: array reference, file name
+// arguments: vector reference, file name
 // returns: nothing
-bool loadSales(array<double, DAYS>& sales, string filename);
+bool loadSales(vector<double>& sales, string filename);
 
 // printSales() prints each day's sales
-// arguments: const array reference
+// arguments: const vector reference
 // returns: nothing
-void printSales(const array<double, DAYS>& sales);
-void analyzeSales(array<double, DAYS>& sales);
+void printSales(const vector<double>& sales);
+void analyzeSales(const vector<double>& sales);
 
 int main() 
 {
@@ -59,9 +60,9 @@ bool loadSales(array<double, DAYS>& sales, string filename)
 }
 
 // printSales() prints each day's sales
-void printSales( const array<double, DAYS>& sales)
+void printSales( const vector<double>& sales)
 {
-    cout << "Daily Sales:" << endl;
+    cout << "Daily Sales:\n\n";
 
     for (int i = 0; i < sales.size(); i++)
     {
@@ -70,20 +71,20 @@ void printSales( const array<double, DAYS>& sales)
     cout << endl;
 }
 
-//analyzeSales() uses various std::array member functions
-void analyzeSales(array<double, DAYS>& sales)
+//analyzeSales() uses various std::vector member functions
+void analyzeSales(const vector<double>& sales)
 {
-    cout << "Array Size: " << sales.size() << endl;
+    cout << "Vector Size: " << sales.size() << endl;
     cout << "First Day's Sales: $" << sales.front() << endl;
     cout << "Last Day's Sales: $" << sales.back() << endl;
 
     if (!sales.empty())
     {
-        cout << "Array is not empty." << endl;
+        cout << "Vector is not empty." << endl;
     }
 
-    array<double, DAYS> backup;
-    backup.fill(0.0);
+    vector<double> backup(sales);
+    
 
     backup.swap(sales);
 
