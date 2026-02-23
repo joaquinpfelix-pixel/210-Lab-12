@@ -16,7 +16,7 @@ bool loadSales(array<double, DAYS>& sales, string filename);
 // arguments: const array reference
 // returns: nothing
 void printSales(const array<double, DAYS>& sales);
-void analyzeSales(const array<double, DAYS>& sales);
+void analyzeSales(array<double, DAYS>& sales);
 
 int main() 
 {
@@ -87,7 +87,7 @@ void analyzeSales(array<double, DAYS>& sales)
 
     backup.swap(sales);
 
-    cout << "after swap, first element in back up: $"
+    cout << "After swap, first element in back up: $"
          << backup.front() << endl;
     double* rawPointer = backup.data();
     cout << "Accessing first element using data(): $"
